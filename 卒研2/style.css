@@ -1,0 +1,416 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif;
+}
+
+*::before, *::after{
+    padding: 0;
+    margin: 0;
+}
+
+:root{
+    --pink: #ff74a4;
+    --violet: #9f6ea3;
+    --lightblack: #515C6F;
+    --white: #ffffff;
+    --darkwhite: #cecaca;
+    --pinkshadow: #ffcbdd;
+    --lightbshadow: rgba(0,0,0,0.15);
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.wrapper{
+    width: 380px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    padding: 25px 30px;
+    background: var(--white);
+    box-shadow: 0px 6px 15px var(--lightbshadow);
+}
+
+.wrapper i{
+    cursor: pointer;
+}
+
+.top-bar, .progress-area .timer, .controls, .music-list .header, .music-list li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar i{
+    font-size: 30px;
+    color: var(--lightblack);
+}
+
+.top-bar span{
+    font-size: 18px;
+    color: var(--lightblack);
+}
+
+.img-area{
+    height: 256px;
+    width: 100%;
+    margin-top: 25px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px var(--lightbshadow);
+}
+
+.img-area img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.song-details{
+    text-align: center;
+    margin: 10px 0;
+    margin: 30px 0;
+    color: var(--lightblack);
+}
+
+.song-details .name{
+    font-size: 21px;
+}
+
+.song-details .artist{
+    opacity: 0.9;
+    font-size: 18px;
+}
+
+.progress-area{
+    height: 6px;
+    width: 100%;
+    background: #f0f0f0;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.progress-area .progress-bar{
+    height: inherit;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg,var(--pink) 0%,var(--violet) 100%);
+}
+
+.progress-bar::before{
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    background: #000;
+    border-radius: inherit;
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+    background: inherit;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+} 
+
+.progress-bar:hover .progress-bar::before{
+    opacity: 1;
+}
+
+.progress-area .timer{
+    margin-top: 2px;
+}
+
+.timer span{
+    font-size: 13px;
+    color: var(--lightblack);
+}
+
+.controls{
+    margin: 40px 0 5px 0;
+}
+
+.controls i{
+    font-size: 28px;
+    user-select: none;
+    background: linear-gradient(var(--pink) 0%,var(--violet) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.controls i:nth-child(2), 
+.controls i:nth-child(4){
+    font-size: 43px;
+}
+
+.controls #prev{
+    margin-right: -13px;
+}
+
+.controls #next{
+    margin-left: -13px;
+}
+
+.controls .play-pause{
+    height: 54px;
+    width: 54px;
+    background: linear-gradient(var(--white) 0%,var(--darkwhite) 100%);
+    box-shadow: 0px 0px 5px var(--pink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-pause::before{
+    content: "";
+    position: absolute;
+    height: 43px;
+    width: 43px;
+    border-radius: inherit;
+    background: linear-gradient(90deg,var(--pink) 0%,var(--violet) 100%);
+}
+.play-pause i{
+    height: 43px;
+    width: 43px;
+    line-height: 43px;
+    text-align: center;
+    border-radius: inherit;
+    background-clip: text;
+    background: inherit;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.music-list{
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    bottom: -55%;
+    width: 100%;
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0px -5px 10px rgba(0,0,0,0.1);
+    background: var(--white);
+    transition: all 0.14s ease-out;
+}
+
+/*showクラスをJavaScriptで使用*/
+.music-list.show{
+    bottom: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.music-list .header .row{
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    color: var(--lightblack);
+}
+
+.header .row i{
+    cursor: default;
+}
+
+.header .row span{
+    margin-left: 5px;
+}
+
+.header #close{
+    font-size: 22px;
+    color: var(--lightblack);
+}
+
+.music-list ul{
+    margin: 10px 0;
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.music-list ul::-webkit-scrollbar{
+    width: 0px;
+}
+
+.music-list ul li{
+    cursor: pointer;
+    list-style: none;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    color: var(--lightblack);
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.music-list ul li:last-child{
+    border-bottom: 0px;
+}
+
+.music-list ul li .row span{
+    font-size: 17px;
+}
+
+ul li .row span p{
+    opacity: 0.9;
+}
+
+ul li .audio-duration{
+    font-size: 16px;
+}
+
+ul li.playing{
+    color: var(--violet);
+    pointer-events: none;
+}
+
+/* ダークモード全体のスタイル */
+body.dark-mode {
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+/* ラッパーの背景色変更 */
+.dark-mode .wrapper {
+    background: #333;
+    color: white;
+    box-shadow: 0px 6px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* トップバーのデザイン */
+.dark-mode .top-bar {
+    background: #444;
+}
+
+/* 歌詞表示のダークモード */
+.dark-mode .lyrics-container {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* プログレスバーの色変更 */
+.dark-mode .progress-area {
+    background: #555;
+}
+
+/* ダークモードのボタン */
+#dark-mode-toggle {
+    background: #444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+/* ホバー時のエフェクト */
+#dark-mode-toggle:hover {
+    background: #666;
+}
+
+/* ダークモード時のテキストの色を白に */
+.dark-mode,
+.dark-mode .wrapper,
+.dark-mode .top-bar span,
+.dark-mode .song-details .name,
+.dark-mode .song-details .artist,
+.dark-mode .lyrics-container,
+.dark-mode .lyrics-list li,
+.dark-mode .timer span {
+    color: #ffffff !important;
+}
+
+/* ダークモード時のアイコンの色を白に */
+.dark-mode i {
+    color: #ffffff !important;
+}
+
+/* ダークモード時のボタンのテキスト色を白に */
+.dark-mode button {
+    color: white !important;
+}
+
+/* ダークモード時の再生・停止ボタンの色変更 */
+.dark-mode .play-pause i {
+    color: white !important;
+}
+
+/* ダークモード時のプログレスバーの色を明るめに */
+.dark-mode .progress-bar {
+    background: linear-gradient(90deg, #ffffff 0%, #bbbbbb 100%) !important;
+}
+
+/* ダークモード時のリピート・シャッフルボタンの色 */
+.dark-mode #repeat-plist,
+.dark-mode #prev,
+.dark-mode #next,
+.dark-mode #more-music {
+    color: white !important;
+}
+
+/* ダークモード時のリストの曲名とアーティストの色を白に */
+.dark-mode .music-list ul li {
+    color: white !important;
+}
+
+/* ダークモード時のリストの曲が選択中の色を明るく */
+.dark-mode ul li.playing {
+    color: #ffcbdd !important;
+}
+
+/* ダークモード時のミュージックリストの背景色を暗く */
+.dark-mode .music-list {
+    background: #333 !important;
+    color: white !important;
+    box-shadow: 0px -5px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* ダークモード時のリストヘッダーの色 */
+.dark-mode .music-list .header {
+    background: #444 !important;
+}
+
+/* ダークモード時のリスト内の曲名とアーティストの色を白に */
+.dark-mode .music-list ul li {
+    color: white !important;
+}
+
+/* ダークモード時のリストの曲が選択中の色を明るく */
+.dark-mode ul li.playing {
+    color: #ffcbdd !important;
+}
+
+/* ダークモード時のリスト内のアイコンの色を白くする */
+.dark-mode .music-list .header i,
+.dark-mode .music-list .header span,
+.dark-mode #close {
+    color: white !important;
+}
+
+.equalizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.equalizer label {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.equalizer input[type="range"] {
+    width: 200px;
+    margin-top: 5px;
+    cursor: pointer;
+}
